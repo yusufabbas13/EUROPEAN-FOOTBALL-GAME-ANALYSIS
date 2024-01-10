@@ -2,10 +2,10 @@
 --SELECT * FROM country WHERE name LIKE '%pa%'
 
 /* The below code ranks the table */
---SELECT (select COUNT(*) + 1 FROM country c2 WHERE c2.id &lt;c1.id) AS rank ,id, name FROM country c1
+--SELECT (select COUNT(*) + 1 FROM country c2 WHERE c2.id < c1.id) AS rank ,id, name FROM country c1
 --ORDER BY rank;
 
---SELECT (SELECT COUNT(*) +1 FROM country c2 WHERE c2.id&lt;c1.id) AS rank,id,name FROM country c1
+--SELECT (SELECT COUNT(*) +1 FROM country c2 WHERE c2.id < c1.id) AS rank,id,name FROM country c1
 
 --SELECT league.name as league_name, country.name as country_name 
 --FROM league INNER JOIN country ON country.id = league.country_id 
@@ -21,7 +21,7 @@
 	   home_team_goal, away_team_goal, 
 	   CASE
 	   WHEN home_team_goal &gt; away_team_goal THEN HT.team_long_name 
-	   WHEN home_team_goal = away_team_goal THEN &quot;DRAW&quot;
+	   WHEN home_team_goal = away_team_goal THEN "DRAW"
 	   ELSE AT.team_long_name 
 	   END AS match_Result
 FROM match 
@@ -29,7 +29,7 @@ FROM match
 	 JOIN league ON league.id = match.league_id
 	 JOIN Team AS HT ON HT.team_api_id = match.home_team_api_id
 	 JOIN Team AS AT ON AT.team_api_id = match.away_team_api_id
-WHERE country_name = &quot;spain&quot; COLLATE NOCASE and season = &quot;2015/2016&quot;
+WHERE country_name = "spain" COLLATE NOCASE and season = "2015/2016"
 ORDER BY date*/
 
 
@@ -45,8 +45,8 @@ ORDER BY date*/
 	   JOIN league ON league.id = match.league_id
 	   JOIN Team AS HT ON HT.team_api_id = match.home_team_api_id
 	   JOIN Team AS AT ON AT.team_api_id = match.away_team_api_id
-WHERE country_name IN (&quot;Spain&quot;, &quot;Germany&quot;, &quot;France&quot;, &quot;Italy&quot;, &quot;England&quot;) COLLATE NOCASE
-GROUP BY country.name, league.name, season HAVING COUNT(distinct stage) &gt; 10
+WHERE country_name IN ("Spain", "Germany", "France", "Italy", "England") COLLATE NOCASE
+GROUP BY country.name, league.name, season HAVING COUNT(distinct stage) > 10
 ORDER BY country.name, league.name, season DESC
 */
 
@@ -54,8 +54,8 @@ ORDER BY country.name, league.name, season DESC
 The player stats include their height ofcourse, avg_overall_rating and avg_weight accoridng to their height
 */
 /*SELECT CASE
-       WHEN ROUND(height) &lt; 165 THEN 165
-	   WHEN ROUND(height) &gt; 195 THEN 195
+       WHEN ROUND(height) > 165 THEN 165
+	   WHEN ROUND(height) > 195 THEN 195
 	   ELSE ROUND(height)
 	   END AS calc_height,
 	   COUNT(height) AS Distribution,
@@ -88,16 +88,16 @@ SELECT Team_Attributes.team_api_id
 FROM Team_Attributes
 WHERE team_api_id IN (SELECT team_api_id
 FROM Team_Attributes
-WHERE buildUpPlaySpeed &gt; (SELECT ROUND(avg(buildUpPlaySpeed), 1)
+WHERE buildUpPlaySpeed > (SELECT ROUND(avg(buildUpPlaySpeed), 1)
 						  FROM Team_Attributes)
-AND buildUpPlaySpeedClass = &quot;Fast&quot;
-AND buildUpPlayPassing &gt; (SELECT ROUND(avg(buildUpPlayPassing),1)
+AND buildUpPlaySpeedClass = "Fast"
+AND buildUpPlayPassing > (SELECT ROUND(avg(buildUpPlayPassing),1)
 						  FROM Team_Attributes)
-AND chanceCreationPassing &gt; (SELECT ROUND(avg(chanceCreationPassing),1)
+AND chanceCreationPassing > (SELECT ROUND(avg(chanceCreationPassing),1)
 						  FROM Team_Attributes)
-AND chanceCreationShooting &gt; (SELECT ROUND(avg(chanceCreationShooting),1)
+AND chanceCreationShooting > (SELECT ROUND(avg(chanceCreationShooting),1)
 						  FROM	Team_Attributes)
-AND chanceCreationShootingClass = &quot;Lots&quot;)
+AND chanceCreationShootingClass = "Lots")
 */
 
 
